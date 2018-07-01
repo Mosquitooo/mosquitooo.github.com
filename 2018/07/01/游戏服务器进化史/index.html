@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="今朝有酒今朝醉，明日愁来明日愁. (Drink and be bleary, for tomorrow we die)">
+<meta name="description" content="游戏服务器进化史但行好事. 莫问前程.(Do your best and God will take care of the rest.) 游戏服务器要素  运行效率,服务器性能(CPU, 内存, 网络IO) 运维部署,扩容容灾 数据存储 开发效率   第一代游戏服务器(单进程无阻赛) client —&amp;gt; Server    最简单的游戏服务器, 只有一个进程, 进程退出, 游戏世界消失.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微信小游戏&lt;打飞机&gt;">
-<meta property="og:url" content="http://yoursite.com/2018/05/20/微信小游戏/index.html">
+<meta property="og:title" content="德特茅斯">
+<meta property="og:url" content="http://yoursite.com/2018/07/01/游戏服务器进化史/index.html">
 <meta property="og:site_name" content="德特茅斯">
-<meta property="og:description" content="今朝有酒今朝醉，明日愁来明日愁. (Drink and be bleary, for tomorrow we die)">
+<meta property="og:description" content="游戏服务器进化史但行好事. 莫问前程.(Do your best and God will take care of the rest.) 游戏服务器要素  运行效率,服务器性能(CPU, 内存, 网络IO) 运维部署,扩容容灾 数据存储 开发效率   第一代游戏服务器(单进程无阻赛) client —&amp;gt; Server    最简单的游戏服务器, 只有一个进程, 进程退出, 游戏世界消失.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-20T09:31:33.599Z">
+<meta property="og:updated_time" content="2018-07-01T14:37:09.395Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微信小游戏&lt;打飞机&gt;">
-<meta name="twitter:description" content="今朝有酒今朝醉，明日愁来明日愁. (Drink and be bleary, for tomorrow we die)">
+<meta name="twitter:title" content="德特茅斯">
+<meta name="twitter:description" content="游戏服务器进化史但行好事. 莫问前程.(Do your best and God will take care of the rest.) 游戏服务器要素  运行效率,服务器性能(CPU, 内存, 网络IO) 运维部署,扩容容灾 数据存储 开发效率   第一代游戏服务器(单进程无阻赛) client —&amp;gt; Server    最简单的游戏服务器, 只有一个进程, 进程退出, 游戏世界消失.">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/20/微信小游戏/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/01/游戏服务器进化史/"/>
 
 
 
 
 
-  <title>微信小游戏<打飞机> | 德特茅斯</title>
+  <title> | 德特茅斯</title>
   
 
 
@@ -234,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/微信小游戏/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/游戏服务器进化史/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mosquito">
@@ -251,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">微信小游戏<打飞机></h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T05:31:33-04:00">
-                2018-05-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T11:07:38-04:00">
+                2018-07-01
               </time>
             
 
@@ -301,222 +301,45 @@
       
 
       
-        <p>今朝有酒今朝醉，明日愁来明日愁. (Drink and be bleary, for tomorrow we die)</p>
-<a id="more"></a>
-<p>这文章主要记录怎样实现一个打飞机的微信小游戏. 主要参考以下资料</p>
+        <hr>
+<h2 id="游戏服务器进化史"><a href="#游戏服务器进化史" class="headerlink" title="游戏服务器进化史"></a>游戏服务器进化史</h2><p>但行好事. 莫问前程.(Do your best and God will take care of the rest.)</p>
+<h3 id="游戏服务器要素"><a href="#游戏服务器要素" class="headerlink" title="游戏服务器要素"></a>游戏服务器要素</h3><blockquote>
+<ol>
+<li>运行效率,服务器性能(CPU, 内存, 网络IO)</li>
+<li>运维部署,扩容容灾</li>
+<li>数据存储</li>
+<li>开发效率</li>
+</ol>
+</blockquote>
+<h3 id="第一代游戏服务器-单进程无阻赛"><a href="#第一代游戏服务器-单进程无阻赛" class="headerlink" title="第一代游戏服务器(单进程无阻赛)"></a>第一代游戏服务器(单进程无阻赛)</h3><blockquote>
+<p>client —&gt; Server  </p>
+</blockquote>
+<p>最简单的游戏服务器, 只有一个进程, 进程退出, 游戏世界消失.<br>在此进程中，由于需要处理并发的客户端的数据包，因此产生了多种选择方法.</p>
+<ol>
+<li>同步多线程(来一个连接便开一个线程去处理, 又分为动态申请和固定数量)</li>
+<li><p>异步单线程(epoll)  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while()</span><br><span class="line">&#123;</span><br><span class="line">    //收包</span><br><span class="line">	//分发</span><br><span class="line">	//处理</span><br><span class="line">	//发包</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>异步多线程  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while()</span><br><span class="line">&#123;</span><br><span class="line">    //收包线程: 接收消息 ---&gt; 收包消息队列</span><br><span class="line">	//逻辑线程: 收包消息队列 ---&gt; 处理 ---&gt; 发包消息队列</span><br><span class="line">	//发包线程: 发包消息队列 ---&gt; 发送消息</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在游戏行业中，采用Linux的epoll作为网络API，以期得到高性能，是一个常见的选择。游戏服务器进程中最常见的阻塞调用就是网路IO，因此在采用epoll之后，整个服务器进程就可能变得完全没有阻塞调用，这样只需要一个线程即可.</p>
+<p><strong><code>缺点:</code></strong></p>
+<pre><code>1. 承载量低
+</code></pre><p>###第二代游戏服务器(分区分服)</p>
 <blockquote>
-<p>#</p>
+<p>client —&gt; Server<br>client —&gt; Server<br>client —&gt; Server</p>
 </blockquote>
-<pre><code>1. [微信小游戏官方文档](https://mp.weixin.qq.com/debug/wxagame/dev/index.html)
-2. [微信开发者工具](https://mp.weixin.qq.com/debug/wxagame/dev/devtools/download.html?t=2018110)
-3. [微信官方第三方库](https://mp.weixin.qq.com/debug/wxagame/dev/tutorial/base/adapter.html?t=2018110)
-</code></pre><p>这里使用了微信提供的一个精简的第三方库, 由于我对js不是很熟, 所以就没有去研究了，拿来主义。</p>
-<blockquote>
-<p>#</p>
-</blockquote>
-<pre><code>项目: [微信小游戏测试](https://github.com/Mosquitooo/WechatAircraft) 
-项目配置: project.config.json
-小游戏程序的入口: game.js
-小游戏程序的配置: game.json  
-</code></pre><blockquote>
-<p>###说到游戏. 肯定想到的是游戏帧循环.</p>
-</blockquote>
-<pre><code>var ctx = canvas.getContext(&apos;2d&apos;)
-//用于其它模块导出, export default仅会导出一个
-export default class Main {
-  constructor() 
-{
-       this.restart()
-  }
-
-  restart()
- {
-    canvas.removeEventListener(&apos;touchstart&apos;, this.touchHandler)
-    window.requestAnimationFrame(this.loop.bind(this), canvas)
-  }
-
-  // 游戏帧循环
-  loop() 
-{
-    this.update()
-
-    this.render()
-
-    if () {
-      // 发射子弹(由飞机发射)
-    }
-    window.requestAnimationFrame(this.loop.bind(this), canvas)
-  }
-
-// 游戏逻辑更新
-update()
-{
-    // 敌人生成
-
-    // 子弹位置更新
-
-    // 敌人位置更新
-
-    // 碰撞检测
-}
-
-// 画布重新渲染
-render()
-{
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-    // 主角渲染
-
-    // 子弹渲染
-
-    // 敌人渲染
-    }
-}
-</code></pre><blockquote>
-<h3 id="主角实现"><a href="#主角实现" class="headerlink" title="主角实现"></a>主角实现</h3></blockquote>
-<pre><code>const screenWidth = window.innerWidth
-const screenHeight = window.innerHeight
-
-export default class Player extends Sprite {
-     constructor() 
-    {
-        super(PLAYER_IMG_SRC, PLAYER_WIDTH, PLAYER_HEIGHT)
-        // 玩家默认处于屏幕底部居中位置
-        this.x = screenWidth / 2 - this.width / 2
-        this.y = screenHeight - this.height - 30
-
-        // 初始化事件监听
-        this.initEvent()
-    }
-
-    initEvent()
-    {
-        // 监听手指按下事件
-        // 监听手指移动事件
-        // 监听手指抬起事件
-    }
-}
-</code></pre><blockquote>
-<p>###子弹发射</p>
-</blockquote>
-<p>子弹类 bullet.js</p>
-<pre><code>import Sprite from &apos;../base/sprite&apos;
-
-const BULLET_IMG_SRC = &apos;images/bullet.png&apos;
-const BULLET_WIDTH = 16
-const BULLET_HEIGHT = 30
-
-export default class Bullet extends Sprite {
-      constructor() {
-           super(BULLET_IMG_SRC, BULLET_WIDTH, BULLET_HEIGHT)
-      }
-
-      init(x, y, speed) {
-        this.x = x
-        this.y = y
-        this.speed = speed
-        this.visible = true
-      }
-
-    // 每一帧更新子弹位置
-    update() {
-        this.y -= this.speed
-    }
-}
-</code></pre><p>给主角添加一个射击的行为shoot()</p>
-<pre><code>shoot()
-{
-    let bullet = new Bullet()
-    bullet.init(this.x + this.width / 2 - bullet.width / 2,this.y - 10, 10)
-    databus.bullets.push(bullet)
-}
-</code></pre><blockquote>
-<p>###敌机生成</p>
-</blockquote>
-<p>敌机类 enemy.js</p>
-<pre><code>import Sprite from &apos;../base/sprite&apos;
-
-const ENEMY_IMG_SRC = &apos;images/enemy.png&apos;
-const ENEMY_WIDTH = 30
-const ENEMY_HEIGHT = 30
-
-function rnd(start, end) {
-  return Math.floor(Math.random() * (end - start) + start)
-}
-
-export default class Enemy extends Sprite{
-  constructor() {
-    super(ENEMY_IMG_SRC, ENEMY_WIDTH, ENEMY_HEIGHT)
-  }
-
-  init(speed) {
-    this.x = rnd(0, window.innerWidth - ENEMY_WIDTH)
-    this.y = -this.height
-
-    this.speed = speed
-
-    this.visible = true
-  }
-
-  // 每一帧更新位置
-  update() {
-    this.y += this.speed
-  }
-}
-</code></pre><p>然后就是在游戏的帧循环中随机生成敌机了</p>
-<blockquote>
-<p>###碰撞检测</p>
-</blockquote>
-<pre><code>/**
-* 简单的碰撞检测定义：
-* 另一个精灵的中心点处于本精灵所在的矩形内即可
-* @param{Sprite} sp: Sptite的实例
-*/
-isCollideWith(sp) {
-let spX = sp.x + sp.width / 2
-let spY = sp.y + sp.height / 2
-
-if (!this.visible || !sp.visible)
-  return false
-
-return !!(spX &gt;= this.x
-  &amp;&amp; spX &lt;= this.x + this.width
-  &amp;&amp; spY &gt;= this.y
-  &amp;&amp; spY &lt;= this.y + this.height)
-}
-</code></pre><p>子弹与敌机的碰撞</p>
-<pre><code>databus.bullets.forEach((bullet) =&gt; {
-  for (let i = 0, il = databus.enemys.length; i &lt; il; i++) {
-    let enemy = databus.enemys[i]
-    if (enemy.isCollideWith(bullet)) 
-    {
-      this.music.playExplosion()
-      enemy.visible = false
-      bullet.visible = false
-      break
-    }
-  }
-})
-</code></pre><p>敌机与主角的碰撞</p>
-<pre><code>for ( let i = 0, il = databus.enemys.length; i &lt; il;i++ ) {
-  let enemy = databus.enemys[i]
-  if ( this.player.isCollideWith(enemy) ) {
-    databus.gameOver = true
-    break
-  }
-}
-</code></pre><blockquote>
-<p>###音乐添加</p>
-</blockquote>
-<p>不描述了. 官方轮子, ctrl c + ctrl v</p>
-<blockquote>
-<p>###程序优化</p>
-</blockquote>
-<p>实现到这里就有个问题了, 子弹和敌机都是在不断的生成和销毁, 出现了这种情况该做什么？ 没错！就是对象池啊少年。</p>
-<blockquote>
-<p>###完善</p>
-</blockquote>
-<p>后续就是分数计算什么的.</p>
+<p>每个游戏服务器都是单独的一个游戏世界, 不同游戏世界的玩家要交互的话需要开辟一个公共服.随着老的服务器人数变少, 需要进行合服操作. 这样开新服、合老服的操作目前已形成一套成熟的运营手段. 分区分服虽然解决了服务器扩展的瓶颈, 但是单进程单线程方式无法充分利用服务器资源, 总会存在承载量的极限, 越复杂的游戏逻辑, 服务器的承载量越低, 因此需要突破进程的限制, 接着演变出多进程模型.  </p>
+<p>三层架构模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Server:  GateServer ---&gt; LogicSerevr ---&gt; DBServer</span><br><span class="line"></span><br><span class="line">网关部分分离成单端的gate服务器，DB部分分离为DB服务器.</span><br><span class="line">把网络功能单独提取出来，让用户统一去连接一个网关服务器，再有网关服务器转发数据到后端游戏服务器。</span><br><span class="line">而游戏服务器之间数据交换也统一连接到网管进行交换。所有有DB交互的，都连接到DB服务器来代理处理</span><br></pre></td></tr></table></figure></p>
+<p>集群模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Server:  GateServer，LoginServer, CenterServer, SocialServer, LogicSerevr, MailServer, DBServer...</span><br><span class="line">随着三层架构的发展，服务器也拆分的越来越细, 每个相同的模块分布到同一台服务器处理, 多组服务器集群共同构成一个服务器端.</span><br><span class="line">一般的可以将一个组内的服务器简单地分成两类：场景相关的（如：行走、战斗等）以及场景不相关的（如：聊天、邮件等）</span><br></pre></td></tr></table></figure></p>
+<p><strong><code>优点</code></strong>:  </p>
+<pre><code>1. 压力分散, 性能明显提升
+</code></pre><p><strong><code>缺点</code></strong>:  </p>
+<pre><code>1. 部署难度升高, 配置文件增多，运维难度提升, 研发成本上升
+</code></pre><h3 id="第三代游戏服务器-世界服分线"><a href="#第三代游戏服务器-世界服分线" class="headerlink" title="第三代游戏服务器(世界服分线)"></a>第三代游戏服务器(世界服分线)</h3><p>之前有做过一个世界服的跑酷游戏, 玩家之间通过邮件交互, PK也是通过开房间实现的. 我想如果是MMO要做世界同服的话, 难度比之要大几个数量级. 对于跑酷的世界同服, 和分区分服差别不大, 数据库采用的是分库分表的处理方式, 通过玩家ID的散列值来确定他进入哪个服务器. 这种方式有个很大的缺点, 在增加和减少服务器的同时, 需要进行大量的数据迁移. 希望后续出现了MMO的世界服游戏能学习一下</p>
+<h3 id="开房间游戏服务器-世界服分线"><a href="#开房间游戏服务器-世界服分线" class="headerlink" title="开房间游戏服务器(世界服分线)"></a>开房间游戏服务器(世界服分线)</h3><p>房间类玩法和MMORPG有很大的不同，在于其在线广播单元的不确定性和广播数量很小。玩家先登录大厅服务器，然后选择组队游戏的功能，服务器会通知参与的所有游戏客户端，新开一条连接到房间服务器上，这样所有参与的用户就能在房间服务器里进行游戏交互了。</p>
 
       
     </div>
@@ -541,14 +364,18 @@ return !!(spX &gt;= this.x
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/05/21/微信小游戏/" rel="next" title="微信小游戏<打飞机>">
+                <i class="fa fa-chevron-left"></i> 微信小游戏<打飞机>
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/20/部署博客/" rel="prev" title="Centos Hexo + github pages 部署博客">
-                Centos Hexo + github pages 部署博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/01/关于热更新的思考/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -626,7 +453,7 @@ return !!(spX &gt;= this.x
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -665,7 +492,7 @@ return !!(spX &gt;= this.x
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#主角实现"><span class="nav-number">1.</span> <span class="nav-text">主角实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#游戏服务器进化史"><span class="nav-number">1.</span> <span class="nav-text">游戏服务器进化史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#游戏服务器要素"><span class="nav-number">1.1.</span> <span class="nav-text">游戏服务器要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一代游戏服务器-单进程无阻赛"><span class="nav-number">1.2.</span> <span class="nav-text">第一代游戏服务器(单进程无阻赛)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三代游戏服务器-世界服分线"><span class="nav-number">1.3.</span> <span class="nav-text">第三代游戏服务器(世界服分线)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开房间游戏服务器-世界服分线"><span class="nav-number">1.4.</span> <span class="nav-text">开房间游戏服务器(世界服分线)</span></a></li></ol></li></ol></div>
             
 
           </div>

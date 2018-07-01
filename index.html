@@ -234,6 +234,608 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/毁经典-坦克大战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mosquito">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="德特茅斯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/01/毁经典-坦克大战/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T11:09:35-04:00">
+                2018-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h2 id="毁经典-坦克大战"><a href="#毁经典-坦克大战" class="headerlink" title="毁经典-坦克大战"></a>毁经典-坦克大战</h2><p>当科技的力量模糊游戏与现实的边界, 游戏将颠覆一切。</p>
+<h3 id="基础设置"><a href="#基础设置" class="headerlink" title="基础设置"></a>基础设置</h3><blockquote>
+<ol>
+<li>2d 游戏的住摄像机需要设置正交性. </li>
+<li>size 直接社置到8.5, 为什么要设置到8.5呢, 因为物品的中心殿是0.5, 游戏物体的大小都是为1, 如果设置成整数的话, 生成物体是无法无边界吻合.</li>
+<li>剩下的就是预设制作, 碰撞体、刚体、脚本添加 </li>
+<li>终于用Unity3D把这个小游戏给做完了. 总结一下入门的教程，乱七八糟的代码和资源在这里<a href="https://github.com/Mosquitooo/TankWar.git" target="_blank" rel="noopener">坦克大战</a></li>
+</ol>
+</blockquote>
+<h3 id="主角移动"><a href="#主角移动" class="headerlink" title="主角移动"></a>主角移动</h3><p>移动无非就是上下左右四个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">private void Move()</span><br><span class="line">&#123;</span><br><span class="line">    float h = Input.GetAxisRaw(&quot;Horizontal&quot;);</span><br><span class="line">    transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.World);</span><br><span class="line">    if (h &lt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        sr.sprite = TankSprtie[3];</span><br><span class="line">        BulletAngle.Set(0, 0, 90);</span><br><span class="line">    &#125;</span><br><span class="line">    else if (h &gt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        sr.sprite = TankSprtie[1];</span><br><span class="line">        BulletAngle.Set(0, 0, -90);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ( h != 0)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    float v = Input.GetAxisRaw(&quot;Vertical&quot;);</span><br><span class="line"></span><br><span class="line">    transform.Translate(Vector3.up * v * speed * Time.deltaTime, Space.World);</span><br><span class="line">    if (v &lt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        sr.sprite = TankSprtie[2];</span><br><span class="line">        BulletAngle.Set(0, 0, 180);</span><br><span class="line">    &#125;</span><br><span class="line">    else if (v &gt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        sr.sprite = TankSprtie[0];</span><br><span class="line">        BulletAngle.Set(0, 0, 0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p>输入延迟问题<br> 一开始用的输入监听API是getAxis, 导致在移动的时候改变方向有延时, 因为这个API有个缓慢变化的过程, 所以后面变成getAxisRow, 这个取的是瞬时值, 问题被修复</p>
+</li>
+<li><p>碰撞抖动问题<br> 一直按住移动键的话, 移动碰到障碍时会一直抖动, 主要是因为一开始MOVE函数是放在Update函数中, 每一帧受到的力是不均匀的, 导致物体不断抖动, 直接把MOVE方法放到FixedUpdate, 这个函数是固定物理帧, 不论机器性能如何, 每一帧的时间间隔一样的, 所以当处理某些物理运动的时候, 最好把逻辑处理放在固定物理帧中。</p>
+</li>
+<li>移动优先级<br> 当同时按下多个键时, 选择移动方向</li>
+</ol>
+<h3 id="渲染和碰撞"><a href="#渲染和碰撞" class="headerlink" title="渲染和碰撞"></a>渲染和碰撞</h3><p>渲染层级的问题</p>
+<pre><code>layer是对游戏中所有物体划分
+如UIlayer, 3DModelLayer, smallAssetsLayer, effectLayer等。
+将不同类的物体划分到不同的层，便于相机拣选，在相机的cullmask中可以选择渲染哪些层，不选择的层则不会渲染。
+还可以用于射线检测对象的拣选，可以指定只对某些层的对象进行射线检测。
+当把画布设置为worldspace后，画布及画布上的UI对象在世界空间默认也是靠Z值来决定渲染顺序的，离相机远的先渲染。
+当设置了sorting layer后，渲染的次序就由sorting layer来确定了。
+
+sorting layer是自定义的标识符，哪个sortinglayer在前（在layer &amp; tags中设置的先后顺序）哪个先渲染。
+order in layer是个数值，是在同一个sorting layer内的细分，sorting layer相同时order in layer的数值越小越先渲染。
+
+屏幕空间的东西都处于UI层不需要sorting layer，只提供sort order(其实也就是order in layer)。
+默认情况下sort oder都是0，此时UI物件按照在hierachy中出现的顺序决定渲染顺序。
+如果sort order不同时，值越小越先渲染。
+
+特别注意sprite默认是个3D空间的物体，就算把它放到一个屏幕空间的canvas上，它仍然是3D空间的物体，只遵循3D空间的规则：总是会被UI挡住。
+
+同时具有sorting layer, order in layer的对象：sprite, 世界空间的canvas
+仅具有sort order的对象：屏幕空间的canvas
+只具有sorting layer的对象：不存在
+只具有order in layer 的对象：不存在
+</code></pre><p>触发碰撞的三个条件</p>
+<ol>
+<li>双方都要有碰撞体</li>
+<li>其中一方要有刚体, 最好是运动的一方</li>
+<li>其中一方的碰撞体要是isTrigger</li>
+</ol>
+<h3 id="地图生成"><a href="#地图生成" class="headerlink" title="地图生成"></a>地图生成</h3><p>这个没啥好写的直接贴代码, 后续可能会研究一下rougelike游戏的随机地图生成算法, 到时候在写一篇总结吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//创建地图元素</span><br><span class="line">private void CreateItem(GameObject obj, Vector3 position, Quaternion rotation)</span><br><span class="line">&#123;</span><br><span class="line">    GameObject item = Instantiate(obj, position, rotation);</span><br><span class="line">    item.transform.SetParent(gameObject.transform);</span><br><span class="line">    ItemPosList.Add(position);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//选择随机位置</span><br><span class="line">private Vector3 CreateRandonPos()</span><br><span class="line">&#123;</span><br><span class="line">    while(true)</span><br><span class="line">    &#123;</span><br><span class="line">        vPos.Set(Random.Range(-9, 10), Random.Range(-7, 8), 0);</span><br><span class="line">        if(!HasThePos(vPos))</span><br><span class="line">        &#123;</span><br><span class="line">            return vPos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 标记位置</span><br><span class="line">private bool HasThePos(Vector3 Pos)</span><br><span class="line">&#123;</span><br><span class="line">    for(int i = 0; i &lt; ItemPosList.Count; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        if(ItemPosList[i] == Pos)</span><br><span class="line">        &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/关于热更新的思考/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mosquito">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="德特茅斯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/01/关于热更新的思考/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T11:07:59-04:00">
+                2018-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h2 id="关于游戏服务器热更新思考"><a href="#关于游戏服务器热更新思考" class="headerlink" title="关于游戏服务器热更新思考"></a>关于游戏服务器热更新思考</h2><p>所有的傻瓜都活在希望和等待之中</p>
+<p>前段时间游戏删档测试, 出现了一些紧急问题, 重启服务器对测试的影响非常严重, 不过由于大部分逻辑通过lua编写, 可以热更新修复, 所以这边文字就本次测试线上修复问题的方法讨论一下.</p>
+<h3 id="项目中c-热更新"><a href="#项目中c-热更新" class="headerlink" title="项目中c++热更新"></a>项目中c++热更新</h3><p>c++属于编译型语言, 一旦生成可执行文件，运行逻辑不可更改, 但究其本质, 服务器本就是对数据的控制, 所以项目中采用动态加载dll的方式来进行问题的动态修复. 本质就是卸载与重新装载消息. 通过重新注册消息处理函数, 达到动态更新的目的.</p>
+<h3 id="lua中的热更新"><a href="#lua中的热更新" class="headerlink" title="lua中的热更新"></a>lua中的热更新</h3><p>Lua的require(modelname)把一个lua文件加载存放到package.loaded[modelname]中，重复require同一个模块实际还是沿用第一次加载的chunk。因此</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package.loaded[_mname] = nil </span><br><span class="line">require( _mname ) </span><br><span class="line">```           </span><br><span class="line">上面两行代码简单粗暴, 但存在问题，由于外部局部变量(upvalue)的存在, 将会使得热更新失效     </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">为了解决这一个问题, 需要将引用该模块的地方的值也做对应的更新.</span><br></pre></td></tr></table></figure>
+<p>function reload_module(module_name)<br>    local old_module = _G[module_name]</p>
+<pre><code>package.loaded[module_name] = nil
+require (module_name)
+
+local new_module = _G[module_name]
+for k, v in pairs(new_module) do
+    old_module[k] = v
+end
+
+package.loaded[module_name] = old_module放
+</code></pre><p>end<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">如果存在闭包, 需要深度递归替换所有的upvalue，需要使用到debug api, debug.getlocal 和 debug.setlocal可以找到并修改upvalue的值.</span><br></pre></td></tr></table></figure></p>
+<p>function UpdateUpvalue(OldFunction, NewFunction, Name, Deepth)<br>     local OldUpvalueMap = {}<br>     local OldExistName = {} </p>
+<pre><code>-- 记录旧的upvalue表  
+for i = 1, math.huge do  
+     local name, value = debug.getupvalue(OldFunction, i)  
+     if not name then break end  
+     OldUpvalueMap[name] = value  
+     OldExistName[name] = true  
+end  
+
+-- 新的upvalue表进行替换  
+for i = 1, math.huge do  
+     local name, value = debug.getupvalue(NewFunction, i)  
+     if not name then break end  
+     if OldExistName[name] then  
+        -- 定制自己的替换规则
+     end  
+end  
+</code></pre><p>end<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">匿名函数一旦被持有, 旧版本要更新成新的版本有一些麻烦, 云风大大提供了方法</span><br></pre></td></tr></table></figure></p>
+<p>function test_func()<br>    return function() return 1 end<br>end<br><code>`</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/游戏服务器进化史/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mosquito">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="德特茅斯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/01/游戏服务器进化史/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T11:07:38-04:00">
+                2018-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h2 id="游戏服务器进化史"><a href="#游戏服务器进化史" class="headerlink" title="游戏服务器进化史"></a>游戏服务器进化史</h2><p>但行好事. 莫问前程.(Do your best and God will take care of the rest.)</p>
+<h3 id="游戏服务器要素"><a href="#游戏服务器要素" class="headerlink" title="游戏服务器要素"></a>游戏服务器要素</h3><blockquote>
+<ol>
+<li>运行效率,服务器性能(CPU, 内存, 网络IO)</li>
+<li>运维部署,扩容容灾</li>
+<li>数据存储</li>
+<li>开发效率</li>
+</ol>
+</blockquote>
+<h3 id="第一代游戏服务器-单进程无阻赛"><a href="#第一代游戏服务器-单进程无阻赛" class="headerlink" title="第一代游戏服务器(单进程无阻赛)"></a>第一代游戏服务器(单进程无阻赛)</h3><blockquote>
+<p>client —&gt; Server  </p>
+</blockquote>
+<p>最简单的游戏服务器, 只有一个进程, 进程退出, 游戏世界消失.<br>在此进程中，由于需要处理并发的客户端的数据包，因此产生了多种选择方法.</p>
+<ol>
+<li>同步多线程(来一个连接便开一个线程去处理, 又分为动态申请和固定数量)</li>
+<li><p>异步单线程(epoll)  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while()</span><br><span class="line">&#123;</span><br><span class="line">    //收包</span><br><span class="line">	//分发</span><br><span class="line">	//处理</span><br><span class="line">	//发包</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>异步多线程  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while()</span><br><span class="line">&#123;</span><br><span class="line">    //收包线程: 接收消息 ---&gt; 收包消息队列</span><br><span class="line">	//逻辑线程: 收包消息队列 ---&gt; 处理 ---&gt; 发包消息队列</span><br><span class="line">	//发包线程: 发包消息队列 ---&gt; 发送消息</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在游戏行业中，采用Linux的epoll作为网络API，以期得到高性能，是一个常见的选择。游戏服务器进程中最常见的阻塞调用就是网路IO，因此在采用epoll之后，整个服务器进程就可能变得完全没有阻塞调用，这样只需要一个线程即可.</p>
+<p><strong><code>缺点:</code></strong></p>
+<pre><code>1. 承载量低
+</code></pre><p>###第二代游戏服务器(分区分服)</p>
+<blockquote>
+<p>client —&gt; Server<br>client —&gt; Server<br>client —&gt; Server</p>
+</blockquote>
+<p>每个游戏服务器都是单独的一个游戏世界, 不同游戏世界的玩家要交互的话需要开辟一个公共服.随着老的服务器人数变少, 需要进行合服操作. 这样开新服、合老服的操作目前已形成一套成熟的运营手段. 分区分服虽然解决了服务器扩展的瓶颈, 但是单进程单线程方式无法充分利用服务器资源, 总会存在承载量的极限, 越复杂的游戏逻辑, 服务器的承载量越低, 因此需要突破进程的限制, 接着演变出多进程模型.  </p>
+<p>三层架构模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Server:  GateServer ---&gt; LogicSerevr ---&gt; DBServer</span><br><span class="line"></span><br><span class="line">网关部分分离成单端的gate服务器，DB部分分离为DB服务器.</span><br><span class="line">把网络功能单独提取出来，让用户统一去连接一个网关服务器，再有网关服务器转发数据到后端游戏服务器。</span><br><span class="line">而游戏服务器之间数据交换也统一连接到网管进行交换。所有有DB交互的，都连接到DB服务器来代理处理</span><br></pre></td></tr></table></figure></p>
+<p>集群模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Server:  GateServer，LoginServer, CenterServer, SocialServer, LogicSerevr, MailServer, DBServer...</span><br><span class="line">随着三层架构的发展，服务器也拆分的越来越细, 每个相同的模块分布到同一台服务器处理, 多组服务器集群共同构成一个服务器端.</span><br><span class="line">一般的可以将一个组内的服务器简单地分成两类：场景相关的（如：行走、战斗等）以及场景不相关的（如：聊天、邮件等）</span><br></pre></td></tr></table></figure></p>
+<p><strong><code>优点</code></strong>:  </p>
+<pre><code>1. 压力分散, 性能明显提升
+</code></pre><p><strong><code>缺点</code></strong>:  </p>
+<pre><code>1. 部署难度升高, 配置文件增多，运维难度提升, 研发成本上升
+</code></pre><h3 id="第三代游戏服务器-世界服分线"><a href="#第三代游戏服务器-世界服分线" class="headerlink" title="第三代游戏服务器(世界服分线)"></a>第三代游戏服务器(世界服分线)</h3><p>之前有做过一个世界服的跑酷游戏, 玩家之间通过邮件交互, PK也是通过开房间实现的. 我想如果是MMO要做世界同服的话, 难度比之要大几个数量级. 对于跑酷的世界同服, 和分区分服差别不大, 数据库采用的是分库分表的处理方式, 通过玩家ID的散列值来确定他进入哪个服务器. 这种方式有个很大的缺点, 在增加和减少服务器的同时, 需要进行大量的数据迁移. 希望后续出现了MMO的世界服游戏能学习一下</p>
+<h3 id="开房间游戏服务器-世界服分线"><a href="#开房间游戏服务器-世界服分线" class="headerlink" title="开房间游戏服务器(世界服分线)"></a>开房间游戏服务器(世界服分线)</h3><p>房间类玩法和MMORPG有很大的不同，在于其在线广播单元的不确定性和广播数量很小。玩家先登录大厅服务器，然后选择组队游戏的功能，服务器会通知参与的所有游戏客户端，新开一条连接到房间服务器上，这样所有参与的用户就能在房间服务器里进行游戏交互了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/微信小游戏/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mosquito">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="德特茅斯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/21/微信小游戏/" itemprop="url">微信小游戏<打飞机></a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T04:33:47-04:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>今朝有酒今朝醉，明日愁来明日愁. (Drink and be bleary, for tomorrow we die)</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/21/微信小游戏/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/Set中关于Key的比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -469,130 +1071,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/微信小游戏/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mosquito">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="德特茅斯">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/20/微信小游戏/" itemprop="url">微信小游戏<打飞机></a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T05:31:33-04:00">
-                2018-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今朝有酒今朝醉，明日愁来明日愁. (Drink and be bleary, for tomorrow we die)</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/20/微信小游戏/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -639,7 +1117,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
