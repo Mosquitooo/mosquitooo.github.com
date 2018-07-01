@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="关于游戏服务器热更新思考所有的傻瓜都活在希望和等待之中 前段时间游戏删档测试, 出现了一些紧急问题, 重启服务器对测试的影响非常严重, 不过由于大部分逻辑通过lua编写, 可以热更新修复, 所以这边文字就本次测试线上修复问题的方法讨论一下. 项目中c++热更新c++属于编译型语言, 一旦生成可执行文件，运行逻辑不可更改, 但究其本质, 服务器本就是对数据的控制, 所以项目中采用动态加载dll的方">
+<meta name="description" content="所有的傻瓜都活在希望和等待之中">
 <meta property="og:type" content="article">
-<meta property="og:title" content="德特茅斯">
+<meta property="og:title" content="关于游戏服务器热更新思考">
 <meta property="og:url" content="http://yoursite.com/2018/07/01/关于热更新的思考/index.html">
 <meta property="og:site_name" content="德特茅斯">
-<meta property="og:description" content="关于游戏服务器热更新思考所有的傻瓜都活在希望和等待之中 前段时间游戏删档测试, 出现了一些紧急问题, 重启服务器对测试的影响非常严重, 不过由于大部分逻辑通过lua编写, 可以热更新修复, 所以这边文字就本次测试线上修复问题的方法讨论一下. 项目中c++热更新c++属于编译型语言, 一旦生成可执行文件，运行逻辑不可更改, 但究其本质, 服务器本就是对数据的控制, 所以项目中采用动态加载dll的方">
+<meta property="og:description" content="所有的傻瓜都活在希望和等待之中">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-01T15:07:59.956Z">
+<meta property="og:updated_time" content="2018-07-01T15:45:44.137Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="德特茅斯">
-<meta name="twitter:description" content="关于游戏服务器热更新思考所有的傻瓜都活在希望和等待之中 前段时间游戏删档测试, 出现了一些紧急问题, 重启服务器对测试的影响非常严重, 不过由于大部分逻辑通过lua编写, 可以热更新修复, 所以这边文字就本次测试线上修复问题的方法讨论一下. 项目中c++热更新c++属于编译型语言, 一旦生成可执行文件，运行逻辑不可更改, 但究其本质, 服务器本就是对数据的控制, 所以项目中采用动态加载dll的方">
+<meta name="twitter:title" content="关于游戏服务器热更新思考">
+<meta name="twitter:description" content="所有的傻瓜都活在希望和等待之中">
 
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <title> | 德特茅斯</title>
+  <title>关于游戏服务器热更新思考 | 德特茅斯</title>
   
 
 
@@ -251,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">关于游戏服务器热更新思考</h1>
         
 
         <div class="post-meta">
@@ -263,7 +263,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T11:07:59-04:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T11:45:44-04:00">
                 2018-07-01
               </time>
             
@@ -301,8 +301,7 @@
       
 
       
-        <hr>
-<h2 id="关于游戏服务器热更新思考"><a href="#关于游戏服务器热更新思考" class="headerlink" title="关于游戏服务器热更新思考"></a>关于游戏服务器热更新思考</h2><p>所有的傻瓜都活在希望和等待之中</p>
+        <p>所有的傻瓜都活在希望和等待之中<br><a id="more"></a></p>
 <p>前段时间游戏删档测试, 出现了一些紧急问题, 重启服务器对测试的影响非常严重, 不过由于大部分逻辑通过lua编写, 可以热更新修复, 所以这边文字就本次测试线上修复问题的方法讨论一下.</p>
 <h3 id="项目中c-热更新"><a href="#项目中c-热更新" class="headerlink" title="项目中c++热更新"></a>项目中c++热更新</h3><p>c++属于编译型语言, 一旦生成可执行文件，运行逻辑不可更改, 但究其本质, 服务器本就是对数据的控制, 所以项目中采用动态加载dll的方式来进行问题的动态修复. 本质就是卸载与重新装载消息. 通过重新注册消息处理函数, 达到动态更新的目的.</p>
 <h3 id="lua中的热更新"><a href="#lua中的热更新" class="headerlink" title="lua中的热更新"></a>lua中的热更新</h3><p>Lua的require(modelname)把一个lua文件加载存放到package.loaded[modelname]中，重复require同一个模块实际还是沿用第一次加载的chunk。因此</p>
@@ -361,8 +360,8 @@ end
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/01/游戏服务器进化史/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2018/05/21/微信小游戏/" rel="next" title="微信小游戏<打飞机>">
+                <i class="fa fa-chevron-left"></i> 微信小游戏<打飞机>
               </a>
             
           </div>
@@ -371,8 +370,8 @@ end
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/01/毁经典-坦克大战/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/01/游戏服务器进化史/" rel="prev" title="游戏服务器进化史">
+                游戏服务器进化史 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -489,7 +488,7 @@ end
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于游戏服务器热更新思考"><span class="nav-number">1.</span> <span class="nav-text">关于游戏服务器热更新思考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目中c-热更新"><span class="nav-number">1.1.</span> <span class="nav-text">项目中c++热更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lua中的热更新"><span class="nav-number">1.2.</span> <span class="nav-text">lua中的热更新</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目中c-热更新"><span class="nav-number">1.</span> <span class="nav-text">项目中c++热更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lua中的热更新"><span class="nav-number">2.</span> <span class="nav-text">lua中的热更新</span></a></li></ol></div>
             
 
           </div>
