@@ -224,6 +224,131 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/13/游戏配置_升级链校验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mosquito">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="德特茅斯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/13/游戏配置_升级链校验/" itemprop="url">采用多叉树检查升级链的配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T11:50:56-04:00">
+                2018-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<p>之前负责了帮会建筑模块, 其中有一个配置大概是这样(原配置是csv格式):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">local BuildingCfg = </span><br><span class="line">&#123;</span><br><span class="line">	[1] = &#123;</span><br><span class="line">		name = &quot;一号建筑&quot;,</span><br><span class="line">		UpgradeCond = </span><br><span class="line">		&#123;</span><br><span class="line">			[1] = &#123;&#125;,</span><br><span class="line">			[2] = &#123;&#123;2,1&#125;,&#123;3,1&#125;&#125;,</span><br><span class="line">			[3] = &#123;&#123;2,2&#125;,&#123;3,2&#125;,&#123;4,1&#125;&#125;,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	[2] = &#123;</span><br><span class="line">		name = &quot;二号建筑&quot;,</span><br><span class="line">		UpgradeCond = </span><br><span class="line">		&#123;</span><br><span class="line">			[1] = &#123;&#123;1,1&#125;&#125;,</span><br><span class="line">			[2] = &#123;&#123;1,2&#125;&#125;,</span><br><span class="line">			[3] = &#123;&#123;1,3&#125;&#125;,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	[3] = &#123;</span><br><span class="line">		name = &quot;三号建筑&quot;,</span><br><span class="line">		UpgradeCond = </span><br><span class="line">		&#123;</span><br><span class="line">			[1] = &#123;&#123;1,1&#125;&#125;,</span><br><span class="line">			[2] = &#123;&#123;1,2&#125;&#125;,</span><br><span class="line">			[3] = &#123;&#123;1,3&#125;&#125;,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	[4] = &#123;</span><br><span class="line">		name = &quot;四号建筑&quot;,</span><br><span class="line">		UpgradeCond = </span><br><span class="line">		&#123;</span><br><span class="line">			[1] = &#123;&#123;1,2&#125;,&#123;2,2&#125;&#125;,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每个建筑升级都有一个前置条件, 比如一号建筑升到二级要把二号建筑和三号建筑升到一级这样子. 某天写自动化测试的妹子说如果她要测试每个建筑的升级是否正常, 让我提供一个升级链给她, 她只要输入建筑ID和等级, 就可以得到一个升级列表, 然后循环升上去. 所以我提供了一个接口给她.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">function GetUpgradeCond(nBuildingID, nBuildingLvl)</span><br><span class="line">	local tBuilding = BuildingCfg[nBuildingID]</span><br><span class="line">	if not tBuilding then</span><br><span class="line">		print(&quot;[GetUpgradeCond]没有对应的建筑配置！&quot;, nBuildingID)</span><br><span class="line">		return</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	if not tBuilding.UpgradeCond then</span><br><span class="line">		print(&quot;[GetUpgradeCond]没有对应的建筑升级配置！&quot;, nBuildingID, nBuildingLvl)</span><br><span class="line">		return</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	return tBuilding.UpgradeCond[nBuildingLvl]</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function AddUpgradeList(t, nBuildingID, nBuildingLvl)</span><br><span class="line">	if not t or type(t) ~= &quot;table&quot; then</span><br><span class="line">		return</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	for k ,v in pairs(t) do</span><br><span class="line">		if v[1] == nBuildingID and v[2] == nBuildingLvl then</span><br><span class="line">			table.remove(t, k)</span><br><span class="line">		end</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	table.insert(t, &#123;nBuildingID, nBuildingLvl&#125;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">-- 获取建筑升到对应等级的条件</span><br><span class="line">function GetUpgradeList(nBuildingID, nBuildingLvl)</span><br><span class="line">	local tUpgradeList = &#123;&#125;</span><br><span class="line">	AddUpgradeList(tUpgradeList, nBuildingID, nBuildingLvl)</span><br><span class="line">	local tPreCond = GetUpgradeCond(nBuildingID, nBuildingLvl)</span><br><span class="line">	while tPreCond and #tPreCond ~= 0 do</span><br><span class="line">		local tTemp1 = &#123;&#125;</span><br><span class="line">		-- 当前条件加入升级链</span><br><span class="line">		for k, v in pairs(tPreCond) do</span><br><span class="line">			AddUpgradeList(tUpgradeList, v[1], v[2])</span><br><span class="line">			local tTempPreCond = GetUpgradeCond(v[1], v[2])</span><br><span class="line">			if tTempPreCond then				</span><br><span class="line">				for k1, v1 in pairs(tTempPreCond) do</span><br><span class="line">					table.insert(tTemp1, v1)</span><br><span class="line">				end</span><br><span class="line">			end</span><br><span class="line">			--这里加了个判断, 如果升级条件互相依赖, 则报错</span><br><span class="line">			--if #tTemp1 &gt; 100 then</span><br><span class="line">			--	print(&quot;[GetUpgradeCond]建筑升级配置出错！&quot;, v[1], v[2])</span><br><span class="line">			--	return</span><br><span class="line">			--end</span><br><span class="line">		end</span><br><span class="line"></span><br><span class="line">		tPreCond = &#123;&#125;</span><br><span class="line">		for k2, v2 in pairs(tTemp1) do</span><br><span class="line">			table.insert(tPreCond, v2)</span><br><span class="line">		end</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	-- 反转一下table</span><br><span class="line">	local nSize = #tUpgradeList</span><br><span class="line">	local nCnt  = math.floor(nSize/2)</span><br><span class="line">	for i=1, nCnt do</span><br><span class="line">		tUpgradeList[i], tUpgradeList[nSize + 1 - i] =  tUpgradeList[nSize + 1 - i], tUpgradeList[i]</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	return tUpgradeList</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
+<p>刷刷的把这个就发给她了, 忽然有一天她跑过来说, 帮会建筑的自动测试卡死了, 让我帮忙看下, 我一听应该是有死循环了, 查找了一下配置, 发现是两个建筑升级互相依赖了, 比如一号建筑生二级需要2号建筑升到一级, 但是二号建筑升到一级需要一号建筑升到二级这样子. 所以我随意在接口中判断了一下就交给她了. 就是上面接口注释掉的那段代码。 </p>
+<p>后面回过头来想一想, 应该在服务器启动的时候做一下升级配置的检查, 如果配置有错误, 直接让服务器无法启动, 毕竟这种配置错误策划很难意识到, 等放出去才发现无法升级的话, 为时已晚。 其实升级的条件不是链式结构, 而是树形结构. 所以动手撸出了下面这个接口.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">--[[ </span><br><span class="line">TreeNode = </span><br><span class="line">&#123;</span><br><span class="line">	tData = &#123;nBuildingID, nBuildingLvl&#125;</span><br><span class="line">	nDeepth = 0,</span><br><span class="line">	tNode = &#123;&#125;,</span><br><span class="line">	tPNode = nil,     -- 指向父节点, 为了向上查找</span><br><span class="line">&#125;</span><br><span class="line">]]</span><br><span class="line"></span><br><span class="line">-- 是否与直系祖先重复</span><br><span class="line">function IsDirectAncestorRepeat(tNode, nBuildingID, nBuildingLvl)</span><br><span class="line">	-- body</span><br><span class="line">	if tNode.tData[1] == nBuildingID and tNode.tData[2] == nBuildingLvl then</span><br><span class="line">		return true</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	if not tNode.tParent then</span><br><span class="line">		return false</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	return IsDirectAncestorRepeat(tNode.tParent, nBuildingID, nBuildingLvl)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">-- 查找重复子节点</span><br><span class="line">function GetRepeat(tRoot, nBuildingID, nBuildingLvl, tRepeatList)</span><br><span class="line">	if tRoot.tData[1] == nBuildingID and tRoot.tData[2] == nBuildingLvl then</span><br><span class="line">		table.insert(tRepeatList, tRoot)</span><br><span class="line">		return</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	if not tRoot.tNode or #tRoot.tNode == 0 then</span><br><span class="line">		return</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	for k, tNode in pairs(tRoot.tNode) do</span><br><span class="line">		GetRepeat(tNode, nBuildingID, nBuildingLvl, tRepeatList)</span><br><span class="line">	end </span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function DelRepeatNode(tRepeatNode)</span><br><span class="line">	-- body</span><br><span class="line">	if not tRepeatNode.tParent then</span><br><span class="line">		print(&quot;[DelRepeatNode]: 已达根节点&quot;)</span><br><span class="line">		return</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	for k, tNode in pairs(tRepeatNode.tParent.tNode) do</span><br><span class="line">		if tNode == tRepeatNode then</span><br><span class="line">			table.remove(tRepeatNode.tParent.tNode, k)</span><br><span class="line">		end</span><br><span class="line">	end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">-- 处理重复子节点</span><br><span class="line">-- 如果当前是最深的, 过继一个子节点, 删掉其它节点</span><br><span class="line">-- 如果当前不是最深的, 保留最深的子节点, 删除其它节点</span><br><span class="line">function DoRepeatNodeList(tRepeatNodeList, tNewParent)</span><br><span class="line">	-- body</span><br><span class="line">	local nCurDeepth = tNewParent.nDeepth + 1</span><br><span class="line">	local tDeepNode = tRepeatNodeList[1]</span><br><span class="line"></span><br><span class="line">	for k, v in pairs(tRepeatNodeList) do</span><br><span class="line">		if v.nDeepth &gt; tDeepNode.nDeepth then</span><br><span class="line">			DelRepeatNode(tDeepNode)</span><br><span class="line">			tDeepNode = v</span><br><span class="line">		end</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	if tDeepNode.nDeepth &lt; nCurDeepth then</span><br><span class="line">		table.insert(tNewParent.tNode, tDeepNode)</span><br><span class="line">		DelRepeatNode(tDeepNode)</span><br><span class="line">	end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function CreateUpgradeTree(tRoot)</span><br><span class="line">	if not tRoot then</span><br><span class="line">		return</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	local PreCond = GetUpgradeCond(tRoot.tData[1], tRoot.tData[2])</span><br><span class="line">	if not PreCond then</span><br><span class="line">		return</span><br><span class="line">	end</span><br><span class="line"></span><br><span class="line">	for k, v in pairs(PreCond) do</span><br><span class="line">		-- 如果与直系祖先重复, 则配置有错误</span><br><span class="line">		if IsDirectAncestorRepeat(tRoot, v[1], v[2]) then</span><br><span class="line">			print(&quot;[CreateNTree] 配置错误&quot;, tRoot.tData[1], tRoot.tData[2])</span><br><span class="line">			return</span><br><span class="line">		end</span><br><span class="line"></span><br><span class="line">		-- 如果存在重复节点, 说明不同建筑升级链有同样升级条件</span><br><span class="line">		-- 这里是每次处理的, 不会出现多个重复节点, 如果出现多个重复的节点, 只保留最深的那个节点</span><br><span class="line">		local tRepeatNodeList = &#123;&#125;</span><br><span class="line">		GetRepeat(tTree, v[1], v[2], tRepeatNodeList)</span><br><span class="line">		if #tRepeatNodeList &gt; 0 then</span><br><span class="line">			DoRepeatNodeList(tRepeatNodeList, tRoot)</span><br><span class="line">			return</span><br><span class="line">		end </span><br><span class="line"></span><br><span class="line">		local tNode = &#123;tData = &#123;v[1], v[2]&#125;, nDeepth = tRoot.nDeepth + 1, tNode = &#123;&#125;, tParent = tRoot&#125;</span><br><span class="line">		table.insert(tRoot.tNode, tNode)</span><br><span class="line">		CreateUpgradeTree(tNode)</span><br><span class="line">	end </span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">tTree = &#123;tData = &#123;1, 3&#125;, nDeepth = 0, tNode = &#123;&#125;, tParent = nil&#125;</span><br><span class="line">CreateUpgradeTree(tTree)</span><br></pre></td></tr></table></figure></p>
+<p>只是把大致思路写了出来, 随便测试了一下, 有不足之处, 请勿见怪.<br>但行好事, 莫问前程。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/13/Set中关于Key的比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1001,7 +1126,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
